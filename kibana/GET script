@@ -1,0 +1,30 @@
+GET cars/_search
+{
+    "size": 10,
+    "query": {
+        "bool": {
+            "must": [
+                {
+                "span_near": {
+                    "clauses": [
+                        {
+                        "span_multi":{
+                                "match": {
+                                    "fuzzy":{
+                                        "name": {
+                                            "value": "marcides",
+                                            "fuzziness": "AUTO"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "slop": 0,
+                        "in_order": false
+                    }
+                }
+            ]
+        }
+    }
+}

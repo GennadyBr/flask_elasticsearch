@@ -12,5 +12,4 @@ RUN  pip3 install --no-cache-dir --upgrade pip \
 
 COPY . /app
 
-CMD python loader.py
-#; python app.py
+CMD python loader.py; python app.py

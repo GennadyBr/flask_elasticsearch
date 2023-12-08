@@ -1,4 +1,8 @@
+import os
 from flask import Flask
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -7,4 +11,4 @@ def search_autocomplete():
     return ""
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=os.getenv('FLASK_PORT'), debug=True)

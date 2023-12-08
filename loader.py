@@ -6,8 +6,11 @@ from settings import logger
 
 load_dotenv()
 
+
 def flog(value):
+    """Выводит переменную в лог в виде f{variable=} строки"""
     logger.info(f"{value=}")
+
 
 url = f"http://{os.getenv('ES_HOST')}:9200"
 es = Elasticsearch(hosts=[url])

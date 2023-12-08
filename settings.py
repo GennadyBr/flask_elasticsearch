@@ -23,3 +23,5 @@ logging_conf = {
 
 logging.config.dictConfig(logging_conf)
 logger = logging.getLogger("app_logger")
+
+index_name = "cars"

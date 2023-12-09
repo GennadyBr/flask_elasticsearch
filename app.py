@@ -6,8 +6,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-@app.route('/')
-# @app.route('/search')
+# @app.route('/')
+@app.route('/search')
 def search_autocomplete():
     return ""
 

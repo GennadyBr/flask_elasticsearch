@@ -18,7 +18,7 @@ def search_autocomplete():
     logger.info(f'{query=}')
     tokens = query.split(" ")
     logger.info(f'{tokens=}')
-    if len(tokens) < 2:
+    if len(tokens) < 1:
         return "Please provide an autocomplete query"
     else:
         payload = get_payload(tokens)

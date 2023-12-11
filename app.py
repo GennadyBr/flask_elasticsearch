@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from dotenv import load_dotenv
 from werkzeug.exceptions import BadRequestKeyError
 
@@ -11,6 +11,11 @@ load_dotenv()
 app = Flask(__name__)
 
 max_size = 100
+
+
+@app.route('/')
+def home():
+    return render_template("index.html")
 
 
 @app.route('/search')
@@ -28,7 +33,7 @@ def search_autocomplete():
         logger.info(f"{response['hits']['hits']=}")
         return [result['_source']['name'] for result in response['hits']['hits']]
     except BadRequestKeyError:
-        return "Please provide an autocomplete query"
+        return "Please provide an query http://5.35.83.245:5002/search?q=<your request>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=os.getenv('FLASK_PORT'), debug=True)

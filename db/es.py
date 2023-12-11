@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 from elasticsearch import Elasticsearch
 from logger.settings import logger
@@ -10,7 +11,7 @@ def es_conn():
     return es
 
 
-def get_payload(tokens: str) -> dict:
+def get_payload(tokens: List[str]) -> dict:
     clauses = [
         {
             "span_multi": {

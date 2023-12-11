@@ -1,7 +1,6 @@
 import os
-from urllib import request
 
-from flask import Flask
+from flask import Flask, request
 from dotenv import load_dotenv
 
 from db.es import es_conn, get_payload

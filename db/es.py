@@ -18,7 +18,7 @@ def get_payload(tokens: List[str]) -> dict:
                 "match": {
                     "fuzzy": {
                         "name": {
-                            "value": "marcides",
+                            "value": i,
                             "fuzziness": "AUTO"
                         }
                     }

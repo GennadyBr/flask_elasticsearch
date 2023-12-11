@@ -4,7 +4,7 @@ from flask import Flask, request
 from dotenv import load_dotenv
 
 from db.es import es_conn, get_payload
-from logger.settings import logger, flog
+from logger.settings import logger
 load_dotenv()
 
 app = Flask(__name__)
@@ -15,18 +15,18 @@ max_size = 100
 @app.route('/search')
 def search_autocomplete():
     query = request.args["q"].lower()
-    flog(query)
+    logger.info(f'{query=}')
     tokens = query.split(" ")
-    flog(tokens)
+    logger.info(f'{tokens=}')
     if len(tokens) < 2:
         return "Please provide an autocomplete query"
     else:
         payload = get_payload(tokens)
-        flog(payload)
+        logger.info(f'{payload=}')
         es = es_conn()
 
         response = es.search(index="cars", query=payload, size=max_size)
-        flog(response['hits']['hits'])
+        logger.info(f"{response['hits']['hits']=}")
         return [result['_source']['name'] for result in response['hits']['hits']]
 
 

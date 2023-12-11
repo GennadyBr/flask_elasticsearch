@@ -1,7 +1,7 @@
 import csv
 from dotenv import load_dotenv
 
-from logger.settings import logger, index_name, flog
+from logger.settings import logger, index_name
 
 from db.es import es_conn
 
@@ -12,7 +12,7 @@ doc_count = es.count(index=index_name)['count']
 if not doc_count:
     with open('Car_details_v3.csv', 'r') as f:
         reader = csv.reader(f)
-        flog(next(reader))
+        logger.info(f'{next(reader)=}')
 
         for i, line in enumerate(reader):
             document = {
@@ -21,9 +21,9 @@ if not doc_count:
                 "year": line[1],
                 "price": line[2]
             }
-            flog(document)
+            logger.info(f'{document=}')
             res = es.index(index=index_name, document=document)
-            flog(res)
+            logger.info(f'{res=}')
     doc_count = es.count(index=index_name)['count']
     logger.info(f'В базу добавлено {doc_count} документов')
 else:

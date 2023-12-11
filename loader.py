@@ -1,25 +1,14 @@
-import logging
-
-from elasticsearch import Elasticsearch
 import csv
-import os
 from dotenv import load_dotenv
-from settings import logger, index_name
+
+from logger.settings import logger, index_name, flog
+
+from db.es import es_conn
 
 load_dotenv()
-
-
-def flog(value):
-    """Выводит переменную в лог в виде f{variable=} строки"""
-    logger.info(f"{value=}")
-
-
-url = f"http://{os.getenv('ES_HOST')}:9200"
-es = Elasticsearch(hosts=[url])
-logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')
-
-
+es = es_conn()
 doc_count = es.count(index=index_name)['count']
+
 if not doc_count:
     with open('Car_details_v3.csv', 'r') as f:
         reader = csv.reader(f)

@@ -25,3 +25,8 @@ logging.config.dictConfig(logging_conf)
 logger = logging.getLogger("app_logger")
 
 index_name = "cars"
+
+
+def flog(value):
+    """Выводит переменную в лог в виде f{variable=} строки"""
+    logger.info(f"{value=}")

@@ -9,11 +9,9 @@ from config.settings import logger, search_field
 def es_conn() -> Elasticsearch:
     url = f"http://{os.getenv('ES_HOST')}:9200"
     try:
-        with Elasticsearch(url) as es:
-            # es = Elasticsearch(url)
-            logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')
-            yield es
-            logger.info(f'close connection to Elasticsearch cluster `{es}')
+        es = Elasticsearch(url)
+        logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')
+        return es
     except ConnectionError as err:
         logger.error(f'ConnectionError {err}')
         # raise ConnectionError(f'ConnectionError {err}')

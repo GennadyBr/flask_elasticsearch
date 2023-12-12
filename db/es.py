@@ -14,7 +14,6 @@ def es_conn() -> Elasticsearch:
         return es
     except ConnectionError as err:
         logger.error(f'es_conn {err}')
-        # raise ConnectionError(f'ConnectionError {err}')
 
 
 def get_payload(tokens: List[str]) -> dict:

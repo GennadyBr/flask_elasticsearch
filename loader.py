@@ -35,8 +35,10 @@ def _load_data():
 try:
     doc_count = es.count(index=index_name)['count']
 except NotFoundError as err:
-    logger.error(err)
+    logger.error(f'doc_count {err}')
     _load_data()
+except AttributeError as err:
+    logger.error(f'doc_count {err}')
 else:
     if not doc_count:
         _load_data()

@@ -35,7 +35,7 @@ def search_autocomplete():
     except BadRequestKeyError:
         return f"Please provide an query http://{os.getenv('VPS_HOST')}:{os.getenv('FLASK_PORT')}/search?q=<your request>"
     except NotFoundError:
-        return f"no such index [{index_name}], available index {es.indices.get_alias('*')}"
+        return f"no such index [{index_name}], available index {es.indices.get_alias(index='*')}"
 
 
 if __name__ == '__main__':

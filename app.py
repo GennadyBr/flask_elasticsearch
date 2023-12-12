@@ -8,7 +8,7 @@ from elasticsearch import NotFoundError
 from db.es import es_conn, get_payload
 from config.settings import logger, setting
 
-index_name, search_field, max_size = setting('index_name'), setting('search_field'), setting('max_size')
+index_name, search_field, max_size = setting['index_name'], setting['search_field'], setting['max_size']
 
 load_dotenv()
 

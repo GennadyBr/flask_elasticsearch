@@ -13,7 +13,7 @@ def es_conn() -> Elasticsearch:
         logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')
         return es
     except ConnectionError as err:
-        logger.error(f'ConnectionError {err}')
+        logger.error(f'es_conn {err}')
         # raise ConnectionError(f'ConnectionError {err}')
 
 

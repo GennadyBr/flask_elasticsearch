@@ -26,7 +26,7 @@ services:
     volumes:
       - elastic_2_volume:/usr/share/elasticsearch/data
     ports:
-      - ${ES_PORT}:9200
+      - ${ES_PORT}:${ES_PORT}
     networks:
       - net_2
 

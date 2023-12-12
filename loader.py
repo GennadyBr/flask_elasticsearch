@@ -9,27 +9,29 @@ load_dotenv()
 es = es_conn()
 
 def _load_data():
-    with open('faker_employee_salary.csv', 'r') as f:
-        reader = csv.reader(f)
-        logger.info(f'{next(reader)=}')
+    try:
+        with open('db/faker_employee_salary.csv', 'r') as f:
+            reader = csv.reader(f)
+            logger.info(f'{next(reader)=}')
 
-        for i, line in enumerate(reader):
-            document = {
-                "Employee ID": line[0],
-                "First Name": line[1],
-                "Last Name": line[2],
-                "Department": line[3],
-                "Salary": line[4],
-                "Joining Date": line[5],
-                "Email ID": line[6],
-                "Address": line[7]
-            }
-            logger.info(f'{document=}')
-            res = es.index(index=index_name, document=document)
-            logger.info(f'{res=}')
-    _doc_count = es.count(index=index_name)['count']
-    logger.info(f'В базу добавлено {_doc_count} документов')
-
+            for i, line in enumerate(reader):
+                document = {
+                    "Employee ID": line[0],
+                    "First Name": line[1],
+                    "Last Name": line[2],
+                    "Department": line[3],
+                    "Salary": line[4],
+                    "Joining Date": line[5],
+                    "Email ID": line[6],
+                    "Address": line[7]
+                }
+                logger.info(f'{document=}')
+                res = es.index(index=index_name, document=document)
+                logger.info(f'{res=}')
+        _doc_count = es.count(index=index_name)['count']
+        logger.info(f'В базу добавлено {_doc_count} документов')
+    except FileNotFoundError as err:
+        logger.error(f'{err=}')
 
 try:
     doc_count = es.count(index=index_name)['count']

@@ -14,27 +14,32 @@ load_dotenv()
 
 app = Flask(__name__)
 
+
 def _search(request):
     es = es_conn()
     try:
         query = request.args["q"].lower()
-        # logger.info(f'{query=}')
+        logger.info(f'{query=}')
         tokens = query.split(" ")
-        # logger.info(f'{tokens=}')
+        logger.info(f'{tokens=}')
         payload = get_payload(tokens)
-        # logger.info(f'{payload=}')
+        logger.info(f'{payload=}')
         response = es.search(index=index_name, query=payload, size=max_size)
-        # logger.info(f"{response['hits']['hits']=}")
+        logger.info(f"{response['hits']['hits']=}")
         sorted_response = sorted(response['hits']['hits'], key=lambda k: k['_score'], reverse=True)
+        logger.info(f"{sorted_response=}")
         # result = [
         #     f"""{res['_score']} / {res['_source'][search_field]} dep: {res['_source']['Department']} salary: {res['_source']['Salary']}$"""
         #     for res in sorted_response]
         return sorted_response
 
-    except BadRequestKeyError:
+    except BadRequestKeyError as err:
+        logger.error(f'_search(request) {err=}')
         return f"Please provide an query http://{os.getenv('VPS_HOST')}:{os.getenv('FLASK_PORT')}/search?q=<your request>"
-    except NotFoundError:
+    except NotFoundError as err:
+        logger.error(f'_search(request) {err=}')
         return f"no such index ['{index_name}'], available index {[key for key in es.indices.get_alias(index='*') if '.' not in key[0]]}"
+
 
 @app.route('/')
 def home():

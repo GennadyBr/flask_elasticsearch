@@ -2,11 +2,12 @@ import csv
 from dotenv import load_dotenv
 from elasticsearch import NotFoundError
 
-from config.settings import logger, index_name
+from config.settings import logger, setting
 from db.es import es_conn
 
 load_dotenv()
 es = es_conn()
+index_name = setting["index_name"]
 
 def _load_data():
     try:

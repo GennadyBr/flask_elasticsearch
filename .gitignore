@@ -51,3 +51,5 @@ coverage.xml
 docs/_build/
 /venv/
 /db/faker_employee_salary.csv
+/templates/user_details.html
+/templates/users_list.html

@@ -32,9 +32,9 @@ def search():
         logger.info(f'{payload=}')
         response = es.search(index=index_name, query=payload, size=max_size)
         logger.info(f"{response['hits']['hits']=}")
-        response.sort("_score", ascending=False)  # по точности поиска
+        sorted_response = sorted(response['hits']['hits'], key=lambda k: k['_score'], reverse=True)
         result = [f"""{res['_source'][search_field]} + {res['_source']['Department']} {res['_source']['Salary']}""" for
-                  res in response['hits']['hits']]
+                  res in sorted_response]
         return result
 
     except BadRequestKeyError:

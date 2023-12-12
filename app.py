@@ -7,6 +7,7 @@ from elasticsearch import NotFoundError
 
 from db.es import es_conn, get_payload
 from config.settings import logger, index_name, search_field
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -31,7 +32,11 @@ def search():
         logger.info(f'{payload=}')
         response = es.search(index=index_name, query=payload, size=max_size)
         logger.info(f"{response['hits']['hits']=}")
-        return [result['_source'][search_field] for result in response['hits']['hits']]
+        response.sort("_score", ascending=False)  # по точности поиска
+        result = [f"""{res['_source'][search_field]} + {res['_source']['Department']} {res['_source']['Salary']}""" for
+                  res in response['hits']['hits']]
+        return result
+
     except BadRequestKeyError:
         return f"Please provide an query http://{os.getenv('VPS_HOST')}:{os.getenv('FLASK_PORT')}/search?q=<your request>"
     except NotFoundError:

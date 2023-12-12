@@ -3,7 +3,9 @@ from typing import List
 
 from elasticsearch import Elasticsearch
 from elastic_transport import ConnectionError
-from config.settings import logger, search_field
+from config.settings import logger, setting
+
+search_field = setting["search_field"]
 
 
 def es_conn() -> Elasticsearch:

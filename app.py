@@ -28,9 +28,6 @@ def _search(request):
         logger.info(f"{response['hits']['hits']=}")
         sorted_response = sorted(response['hits']['hits'], key=lambda k: k['_score'], reverse=True)
         logger.info(f"{sorted_response=}")
-        # result = [
-        #     f"""{res['_score']} / {res['_source'][search_field]} dep: {res['_source']['Department']} salary: {res['_source']['Salary']}$"""
-        #     for res in sorted_response]
         return [d['_source'] for d in sorted_response]
 
     except BadRequestKeyError as err:
@@ -43,11 +40,10 @@ def _search(request):
 
 @app.route('/')
 def home():
-    users = _search(request)
-    return render_template("index.html", users=users)
+    return render_template("search.html")
 
 
-@app.route('/search')
+@app.route('/search', methods=['POST'])
 def search():
     users = _search(request)
     return render_template("index.html", users=users)

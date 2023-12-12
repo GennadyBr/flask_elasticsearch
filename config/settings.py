@@ -3,7 +3,7 @@ import logging.config
 setting = {
     "index_name": "salary",
     "search_field": "Name",
-    "max_size": 20
+    "max_size": 500
 }
 
 logging_conf = {

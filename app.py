@@ -33,7 +33,7 @@ def search_autocomplete():
         logger.info(f"{response['hits']['hits']=}")
         return [result['_source']['name'] for result in response['hits']['hits']]
     except BadRequestKeyError:
-        return "Please provide an query http://5.35.83.245:5002/search?q=<your request>"
+        return f"Please provide an query http://{os.getenv('VPS_HOST')}:{os.getenv('FLASK_PORT')}/search?q=<your request>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=os.getenv('FLASK_PORT'), debug=True)

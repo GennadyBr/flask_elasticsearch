@@ -12,7 +12,7 @@ def _load_data():
     try:
         with open('db/faker_employee_salary.csv', 'r') as f:
             reader = csv.reader(f)
-            logger.info(f'{next(reader)=}')
+            # logger.info(f'{next(reader)=}')
 
             for i, line in enumerate(reader):
                 document = {
@@ -25,9 +25,9 @@ def _load_data():
                     "Email ID": line[6],
                     "Address": line[7]
                 }
-                logger.info(f'{document=}')
+                # logger.info(f'{document=}')
                 res = es.index(index=index_name, document=document)
-                logger.info(f'{res=}')
+                # logger.info(f'{res=}')
         _doc_count = es.count(index=index_name)['count']
         logger.info(f'В базу добавлено {_doc_count} документов')
     except FileNotFoundError as err:

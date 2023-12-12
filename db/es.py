@@ -6,7 +6,7 @@ from elastic_transport import ConnectionError
 from config.settings import logger, search_field
 
 def es_conn():
-    url = f"http://{os.getenv('ES_HOST')}:{os.getenv('ES_PORT')}"
+    url = f"http://{os.getenv('ES_HOST')}:9200"
     try:
         es = Elasticsearch(hosts=[url])
         logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')

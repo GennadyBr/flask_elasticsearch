@@ -1,4 +1,4 @@
-GET cars/_search
+GET salary/_search
 {
     "size": 10,
     "query": {
@@ -11,8 +11,8 @@ GET cars/_search
                         "span_multi":{
                                 "match": {
                                     "fuzzy":{
-                                        "name": {
-                                            "value": "marcides",
+                                        "Last Name": {
+                                            "value": "Alex",
                                             "fuzziness": "AUTO"
                                             }
                                         }

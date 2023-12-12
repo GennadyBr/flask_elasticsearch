@@ -2,7 +2,7 @@ import os
 from typing import List
 
 from elasticsearch import Elasticsearch
-from logger.settings import logger
+from config.settings import logger, search_field
 
 def es_conn():
     url = f"http://{os.getenv('ES_HOST')}:9200"
@@ -17,7 +17,7 @@ def get_payload(tokens: List[str]) -> dict:
             "span_multi": {
                 "match": {
                     "fuzzy": {
-                        "name": {
+                        search_field: {
                             "value": i,
                             "fuzziness": "AUTO"
                         }

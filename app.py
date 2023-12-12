@@ -18,7 +18,8 @@ app = Flask(__name__)
 def _search(request):
     es = es_conn()
     try:
-        query = request.args["q"].lower()
+        # query = request.args["q"].lower()
+        query = request.form.get('query')
         logger.info(f'{query=}')
         tokens = query.split(" ")
         logger.info(f'{tokens=}')

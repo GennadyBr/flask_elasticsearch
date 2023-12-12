@@ -17,8 +17,7 @@ def _load_data():
             for i, line in enumerate(reader):
                 document = {
                     "Employee ID": line[0],
-                    "First Name": line[1],
-                    "Last Name": line[2],
+                    "Name": line[2] + ' ' + line[1],
                     "Department": line[3],
                     "Salary": line[4],
                     "Joining Date": line[5],

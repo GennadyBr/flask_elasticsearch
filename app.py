@@ -31,7 +31,7 @@ def _search(request):
         # result = [
         #     f"""{res['_score']} / {res['_source'][search_field]} dep: {res['_source']['Department']} salary: {res['_source']['Salary']}$"""
         #     for res in sorted_response]
-        return sorted_response
+        return [d['_source'] for d in sorted_response]
 
     except BadRequestKeyError as err:
         logger.error(f'_search(request) {err=}')

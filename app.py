@@ -20,7 +20,7 @@ def home():
 
 
 @app.route('/search')
-def search_autocomplete():
+def search():
     es = es_conn()
     try:
         query = request.args["q"].lower()
@@ -35,7 +35,7 @@ def search_autocomplete():
     except BadRequestKeyError:
         return f"Please provide an query http://{os.getenv('VPS_HOST')}:{os.getenv('FLASK_PORT')}/search?q=<your request>"
     except NotFoundError:
-        return f"no such index [{index_name}], available index {[key for key in es.indices.get_alias(index='*') if '.' not in key[0]]}"
+        return f"no such index ['{index_name}'], available index {[key for key in es.indices.get_alias(index='*') if '.' not in key[0]]}"
 
 
 if __name__ == '__main__':

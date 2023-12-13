@@ -9,12 +9,12 @@ from config.settings import logger, setting
 
 def es_conn() -> Elasticsearch:
     url = f"http://{os.getenv('ES_HOST')}:9200"
-    for _ in range(10):
+    for i in range(10):
         try:
             es = Elasticsearch(url)
             logger.info(f'Connecting to Elasticsearch cluster `{es.info().body["cluster_name"]}`')
         except ConnectionError as err:
-            logger.error(f'es_conn {err}')
+            logger.error(f'es_conn#{i}; {err}')
             sleep(5)
         else:
             return es

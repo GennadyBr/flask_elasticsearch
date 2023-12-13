@@ -6,8 +6,6 @@ from config.settings import logger, setting
 from db.es import es_conn
 
 load_dotenv()
-es = es_conn()
-index_name = setting["index_name"]
 
 def _load_data():
     try:
@@ -34,15 +32,19 @@ def _load_data():
         logger.error(f'{err=}')
 
 
-try:
-    doc_count = es.count(index=index_name)['count']
-except NotFoundError as err:
-    logger.error(f'doc_count {err}')
-    _load_data()
-except AttributeError as err:
-    logger.error(f'doc_count {err}')
-else:
-    if not doc_count:
+if __name__ == '__main__':
+    es = es_conn()
+    index_name = setting["index_name"]
+
+    try:
+        doc_count = es.count(index=index_name)['count']
+    except NotFoundError as err:
+        logger.error(f'doc_count {err}')
         _load_data()
+    except AttributeError as err:
+        logger.error(f'doc_count {err}')
     else:
-        logger.info(f'База уже содержит {doc_count} документов')
+        if not doc_count:
+            _load_data()
+        else:
+            logger.info(f'База уже содержит {doc_count} документов')

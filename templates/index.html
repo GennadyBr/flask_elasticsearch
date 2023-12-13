@@ -14,24 +14,26 @@
 <table class="table">
     <thead>
         <tr>
-        <th scope="col">Employee ID</th>
+        <th scope="col">Employee_ID</th>
+        <th scope="col">Search_Grade</th>
         <th scope="col">Name</th>
         <th scope="col">Department</th>
         <th scope="col">Salary</th>
-        <th scope="col">Joining Date</th>
-        <th scope="col">Email ID</th>
+        <th scope="col">Joining_Date</th>
+        <th scope="col">Email_ID</th>
         <th scope="col">Address</th>
         </tr>
     </thead>
     <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user["Employee ID"] }}</td>
+                <td>{{ user["Employee_ID"] }}</td>
+                <td>{{ user["score"] }}</td>
                 <td>{{ user["Name"] }}</td>
                 <td>{{ user["Department"] }}</td>
                 <td>{{ user["Salary"] }}</td>
-                <td>{{ user["Joining Date"] }}</td>
-                <td>{{ user["Email ID"] }}</td>
+                <td>{{ user["Joining_Date"] }}</td>
+                <td>{{ user["Email_ID"] }}</td>
                 <td>{{ user["Address"] }}</td>
             </tr>
         {% endfor %}

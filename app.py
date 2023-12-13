@@ -18,18 +18,18 @@ app = Flask(__name__)
 def _search(request):
     es = es_conn()
     try:
-        # query = request.args["q"].lower()
-        query = request.form.get('query')
-        logger.info(f'{query=}')
-        tokens = query.split(" ")
-        logger.info(f'{tokens=}')
+        # query = request.form.get('query')
+        # logger.info(f'{query=}')
+        tokens = request.form.get('query').split(" ")
+        # logger.info(f'{tokens=}')
         payload = get_payload(tokens)
-        logger.info(f'{payload=}')
+        # logger.info(f'{payload=}')
         response = es.search(index=index_name, query=payload, size=max_size)
-        logger.info(f"{response['hits']['hits']=}")
+        # logger.info(f"{response['hits']['hits']=}")
         sorted_response = sorted(response['hits']['hits'], key=lambda k: k['_score'], reverse=True)
-        logger.info(f"{sorted_response=}")
-        return [d['_source'] for d in sorted_response]
+        result = [d['_source'] | {'score' : d['_score']} for d in sorted_response]
+        logger.info(f"Найдено {len(result)=} записей")
+        return result
 
     except BadRequestKeyError as err:
         logger.error(f'_search(request) {err=}')

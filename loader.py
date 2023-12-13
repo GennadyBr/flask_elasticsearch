@@ -17,12 +17,12 @@ def _load_data():
 
             for i, line in enumerate(reader):
                 document = {
-                    "Employee ID": line[0],
+                    "Employee_ID": line[0],
                     "Name": line[2] + ' ' + line[1],
                     "Department": line[3],
                     "Salary": line[4],
-                    "Joining Date": line[5],
-                    "Email ID": line[6],
+                    "Joining_Date": line[5],
+                    "Email_ID": line[6],
                     "Address": line[7]
                 }
                 # logger.info(f'{document=}')

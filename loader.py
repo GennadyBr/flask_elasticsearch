@@ -33,6 +33,7 @@ def _load_data():
     except FileNotFoundError as err:
         logger.error(f'{err=}')
 
+
 try:
     doc_count = es.count(index=index_name)['count']
 except NotFoundError as err:

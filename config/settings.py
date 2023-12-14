@@ -3,7 +3,8 @@ import logging.config
 setting = {
     "index_name": "salary",
     "search_field": "Name",
-    "max_size": 500
+    "max_size": 500,
+    "csv_file": "db/faker_employee_salary.csv"
 }
 
 logging_conf = {

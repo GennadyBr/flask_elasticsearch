@@ -17,6 +17,7 @@ def es_conn() -> Elasticsearch:
             logger.error(f'es_conn#{i}; {err}')
             sleep(5)
         else:
+            logger.info(f'es_conn#{i} CONNECTION ESTABLISHED')
             return es
 
 

@@ -10,7 +10,7 @@ load_dotenv()
 
 def _load_data():
     try:
-        with open('db/faker_employee_salary.csv', 'r') as f:
+        with open(setting["csv_file"], 'r') as f:
             reader = csv.reader(f)
             # logger.info(f'{next(reader)=}')
 
@@ -38,7 +38,7 @@ def _load_data():
         _doc_count = es.count(index=index_name)['count']
         logger.info(f'В базу добавлено {_doc_count} документов')
     except FileNotFoundError as err:
-        logger.error(f'{err=}')
+        logger.error(f'CAN FIND {setting["csv_file"]}, {err=}')
 
 
 if __name__ == '__main__':

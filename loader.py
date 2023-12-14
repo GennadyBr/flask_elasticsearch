@@ -57,4 +57,4 @@ if __name__ == '__main__':
         if not doc_count:
             _load_data(es, index_name)
         else:
-            logger.info(f'База уже содержит {doc_count} документов')
+            logger.info(f'Elasticsearch contains {doc_count/1000000}mln docs')

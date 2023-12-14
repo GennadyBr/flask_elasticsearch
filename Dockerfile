@@ -12,4 +12,6 @@ RUN  pip3 install --no-cache-dir --upgrade pip \
 
 COPY . /app
 
-CMD python loader.py; python app.py
+#CMD python loader.py; python app.py
+CMD python loader.py; gunicorn --bind 0.0.0.0:5002 app:app
+#CMD python loader.py; gunicorn --bind 0.0.0.0:5002 main:app

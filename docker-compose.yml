@@ -58,7 +58,7 @@ services:
     networks:
       - net_2
     depends_on:
-      - elastic_2
+      - app_2
     restart: always
     env_file:
       - .env

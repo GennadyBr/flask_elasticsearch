@@ -7,6 +7,7 @@ from db.es import es_conn
 
 load_dotenv()
 
+
 def _load_data():
     try:
         with open('db/faker_employee_salary.csv', 'r') as f:
@@ -14,11 +15,15 @@ def _load_data():
             # logger.info(f'{next(reader)=}')
 
             for i, line in enumerate(reader):
+                salary1 = int(line[4]) % 1000  # less 1000
+                salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000
+                salary3 = int(line[4]) // 1000000  # gt 1mln
+                salary = f"""$ {salary3 if salary3 > 0 else ''}{"'" if salary3 > 0 else ''}{salary2 if salary2 > 0 else ''}{"'" if salary2 > 0 else ''}{salary1}.00"""
                 document = {
                     "Employee_ID": line[0],
                     "Name": line[2] + ' ' + line[1],
                     "Department": line[3],
-                    "Salary": line[4],
+                    "Salary": salary,
                     "Joining_Date": line[5],
                     "Email_ID": line[6],
                     "Address": line[7]

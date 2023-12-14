@@ -41,7 +41,7 @@ def _search(request):
 
 @app.route('/')
 def home():
-    return render_template("search.html")
+    return render_template("index.html")
 
 
 @app.route('/search', methods=['POST'])

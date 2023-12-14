@@ -8,13 +8,12 @@ from db.es import es_conn
 load_dotenv()
 
 
-def _load_data():
+def _load_data(es, index_name):
     try:
         with open(setting["csv_file"], 'r') as f:
             reader = csv.reader(f)
-            logger.info(f'{next(reader)=}') #пропуск первой строки с заголовками
+            logger.info(f'LOADING STARTED {next(reader)=}') #пропуск первой строки с заголовками
             for i, line in enumerate(reader):
-                # logger.info(f"Loading row {i}: {line}")
                 try:
                     salary1 = int(line[4]) % 1000  # less 1000
                     salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000
@@ -32,15 +31,10 @@ def _load_data():
                     "Email_ID": line[6],
                     "Address": line[7]
                 }
-                # logger.info(f'{document=}')
-                res = es.index(index=index_name, document=document)
-                # if res:
-                #     logger.info(f"Loaded row {i}")
-                # else:
-                #     logger.error(f"loading failed {i}")
-                # logger.info(f'{res=}')
+                es.index(index=index_name, document=document)
+            logger.info(f'LOADING COMPLETED')
     except FileNotFoundError as err:
-        logger.error(f'CAN FIND {setting["csv_file"]}, {err=}')
+        logger.error(f"""CAN'T FIND {setting["csv_file"]}, {err=}""")
     else:
         _doc_count = es.count(index=index_name)['count']
         logger.info(f'В базу добавлено {_doc_count} документов')
@@ -54,11 +48,11 @@ if __name__ == '__main__':
         doc_count = es.count(index=index_name)['count']
     except NotFoundError as err:
         logger.error(f'doc_count {err}')
-        _load_data()
+        _load_data(es, index_name)
     except AttributeError as err:
         logger.error(f'doc_count {err}')
     else:
         if not doc_count:
-            _load_data()
+            _load_data(es, index_name)
         else:
             logger.info(f'База уже содержит {doc_count} документов')

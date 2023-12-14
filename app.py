@@ -47,7 +47,7 @@ def home():
 @app.route('/search', methods=['POST'])
 def search():
     users = _search(request)
-    return render_template("index.html", users=users)
+    return render_template("index.html", users=users, len_users=len(users))
 
 
 if __name__ == '__main__':

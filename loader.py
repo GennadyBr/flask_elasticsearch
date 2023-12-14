@@ -34,10 +34,10 @@ def _load_data():
                 }
                 # logger.info(f'{document=}')
                 res = es.index(index=index_name, document=document)
-                if res:
-                    logger.info(f"Loaded row {i}")
-                else:
-                    logger.error(f"loading failed {i}")
+                # if res:
+                #     logger.info(f"Loaded row {i}")
+                # else:
+                #     logger.error(f"loading failed {i}")
                 # logger.info(f'{res=}')
     except FileNotFoundError as err:
         logger.error(f'CAN FIND {setting["csv_file"]}, {err=}')

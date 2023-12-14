@@ -21,7 +21,7 @@ def _load_data():
                     salary3 = int(line[4]) // 1000000  # gt 1mln
                     salary = f"""$ {salary3 if salary3 > 0 else ''}{"'" if salary3 > 0 else ''}{salary2 if salary2 > 0 else ''}{"'" if salary2 > 0 else ''}{salary1}.00"""
                 except ValueError as err:
-                    logger.error(f"{line[4]=}, {salary1=}, {salary2=}, {salary3=} {err=}")
+                    logger.error(f"{line[4]=}, {err=}") #, {salary1=}, {salary2=}, {salary3=}
                     salary = line[4]
                 document = {
                     "Employee_ID": line[0],

@@ -35,10 +35,11 @@ def _load_data():
                 # logger.info(f'{document=}')
                 res = es.index(index=index_name, document=document)
                 # logger.info(f'{res=}')
-        _doc_count = es.count(index=index_name)['count']
-        logger.info(f'В базу добавлено {_doc_count} документов')
     except FileNotFoundError as err:
         logger.error(f'CAN FIND {setting["csv_file"]}, {err=}')
+    else:
+        _doc_count = es.count(index=index_name)['count']
+        logger.info(f'В базу добавлено {_doc_count} документов')
 
 
 if __name__ == '__main__':

@@ -1,5 +1,12 @@
 import logging.config
 
+setting = {
+    "index_name": "salary",
+    "search_field": "Name",
+    "max_size": 500,
+    "csv_file": "db/faker_employee_salary.csv"
+}
+
 logging_conf = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -23,6 +30,3 @@ logging_conf = {
 
 logging.config.dictConfig(logging_conf)
 logger = logging.getLogger("app_logger")
-
-index_name = "salary"
-search_field = "Name"

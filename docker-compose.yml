@@ -6,7 +6,7 @@ services:
 #    ports:
 #      - ${FLASK_PORT}:${FLASK_PORT}
     expose:
-      - 5002
+      - 5000
     links:
       - elastic_2
     networks:
@@ -30,7 +30,7 @@ services:
 #    ports:
 #      - ${ES_PORT}:9200
     expose:
-      - 9202
+      - 9200
     networks:
       - net_2
 
@@ -42,7 +42,7 @@ services:
 #    ports:
 #      - ${KIBANA_PORT}:5601
     expose:
-      - 5602
+      - 5600
     environment:
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
     networks:

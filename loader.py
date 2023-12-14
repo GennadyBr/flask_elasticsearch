@@ -18,7 +18,7 @@ def _load_data(es, index_name):
                     salary1 = int(line[4]) % 1000  # less 1000
                     salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000
                     salary3 = int(line[4]) // 1000000  # gt 1mln
-                    salary = f"""$ {salary3 if salary3 > 0 else ''}{"'" if salary3 > 0 else ''}{salary2 if salary2 > 0 else ''}{"'" if salary2 > 0 else ''}{salary1}.00"""
+                    salary = f"""${salary3 if salary3 > 0 else ''}{"'" if salary3 > 0 else ''}{salary2 if salary2 > 0 else ''}{"'" if salary2 > 0 else ''}{salary1}"""
                 except ValueError as err:
                     logger.error(f"{line[4]=}, {err=}")  # , {salary1=}, {salary2=}, {salary3=}
                     salary = line[4]

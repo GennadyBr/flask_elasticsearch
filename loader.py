@@ -12,8 +12,10 @@ def _load_data(es, index_name):
     try:
         with open(setting["csv_file"], 'r') as f:
             reader = csv.reader(f)
-            logger.info(f'LOADING STARTED {next(reader)=}') #пропуск первой строки с заголовками
+            logger.info(f'LOADING STARTED {next(reader)=}')  # пропуск первой строки с заголовками
             for i, line in enumerate(reader):
+                if i % 100000 == 0:
+                    logger.info(f'{i/100000} mln docs added')
                 try:
                     salary1 = int(line[4]) % 1000  # less 1000
                     salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000

@@ -12,10 +12,9 @@ def _load_data():
     try:
         with open(setting["csv_file"], 'r') as f:
             reader = csv.reader(f)
-            # logger.info(f'{next(reader)=}')
-
+            logger.info(f'{next(reader)=}') #пропуск первой строки с заголовками
             for i, line in enumerate(reader):
-                logger.info(f"Loading row {i}: {line}")
+                # logger.info(f"Loading row {i}: {line}")
                 try:
                     salary1 = int(line[4]) % 1000  # less 1000
                     salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000

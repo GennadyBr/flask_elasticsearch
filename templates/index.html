@@ -35,22 +35,34 @@
             background-color: #45a049;
         }
 
-        h1 {
+        header h1 {
+            font-size: 70px;
+            font-weight: 600;
+            background-image: conic-gradient(#553c9a, #ee4b2b, #45a049);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
             text-align: center;
         }
 
-        h2 {
+        header h2 {
+            font-size: 50px;
+            font-weight: 600;
+            background-image: conic-gradient(#553c9a, #ee4b2b, #45a049);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
             text-align: center;
         }
     </style>
     <meta charset="UTF-8">
     <title>Employee List</title>
     <link rel="stylesheet" crossorigin="anonymous"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" >
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 
-	<script crossorigin="anonymous"
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" >
-	</script>
+    <script crossorigin="anonymous"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 </head>
 <h1>EMPLOYEE NAME SEARCH</h1>
 <form action="/search" method="POST">
@@ -64,7 +76,7 @@
 <br>
 <table class="table">
     <thead>
-        <tr>
+    <tr>
         <th scope="col">Employee_ID</th>
         <th scope="col">Search_Grade</th>
         <th scope="col">Name</th>
@@ -73,21 +85,21 @@
         <th scope="col">Joining_Date</th>
         <th scope="col">Email_ID</th>
         <th scope="col">Address</th>
-        </tr>
+    </tr>
     </thead>
     <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user["Employee_ID"] }}</td>
-                <td>{{ user["score"] }}</td>
-                <td>{{ user["Name"] }}</td>
-                <td>{{ user["Department"] }}</td>
-                <td>{{ user["Salary"] }}</td>
-                <td>{{ user["Joining_Date"] }}</td>
-                <td>{{ user["Email_ID"] }}</td>
-                <td>{{ user["Address"] }}</td>
-            </tr>
-        {% endfor %}
+    {% for user in users %}
+    <tr>
+        <td>{{ user["Employee_ID"] }}</td>
+        <td>{{ user["score"] }}</td>
+        <td>{{ user["Name"] }}</td>
+        <td>{{ user["Department"] }}</td>
+        <td>{{ user["Salary"] }}</td>
+        <td>{{ user["Joining_Date"] }}</td>
+        <td>{{ user["Email_ID"] }}</td>
+        <td>{{ user["Address"] }}</td>
+    </tr>
+    {% endfor %}
     </tbody>
 </table>
 </html>

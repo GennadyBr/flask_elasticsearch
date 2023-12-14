@@ -15,7 +15,7 @@ def _load_data(es, index_name):
             logger.info(f'LOADING STARTED {next(reader)=}')  # пропуск первой строки с заголовками
             for i, line in enumerate(reader):
                 if i % 100000 == 0:
-                    logger.info(f'{i/100000} mln docs added')
+                    logger.info(f'{i/1000000} mln docs added')
                 try:
                     salary1 = int(line[4]) % 1000  # less 1000
                     salary2 = int(line[4]) // 1000 % 1000  # less 1mln, gt 1000
@@ -39,7 +39,7 @@ def _load_data(es, index_name):
         logger.error(f"""CAN'T FIND {setting["csv_file"]}, {err=}""")
     else:
         _doc_count = es.count(index=index_name)['count']
-        logger.info(f'В базу добавлено {_doc_count} документов')
+        logger.info(f'{_doc_count/1000000}mln docs added to Elasticsearch')
 
 
 if __name__ == '__main__':

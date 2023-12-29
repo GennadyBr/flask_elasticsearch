@@ -1,6 +1,6 @@
 import csv
 from dotenv import load_dotenv
-from elasticsearch import NotFoundError
+from elasticsearch import NotFoundError, ApiError
 
 from config.settings import logger, setting
 from db.es import es_conn
@@ -49,10 +49,12 @@ if __name__ == '__main__':
     try:
         doc_count = es.count(index=index_name)['count']
     except NotFoundError as err:
-        logger.error(f'doc_count {err}')
+        logger.error(f'No existing index {setting["index_name"]} lets start loading new data into new index')
         _load_data(es, index_name)
     except AttributeError as err:
         logger.error(f'doc_count {err}')
+    except ApiError as err:
+        logger.error(f'Something wrong with ES elastic_2_volume. Lets delete volume and start again {err}')
     else:
         if not doc_count:
             _load_data(es, index_name)

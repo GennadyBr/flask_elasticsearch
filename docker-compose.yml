@@ -27,8 +27,8 @@ services:
     restart: always
     volumes:
       - elastic_2_volume:/usr/share/elasticsearch/data
-#    ports:
-#      - ${ES_PORT}:9200
+    ports:
+      - ${ES_PORT}:9200
     expose:
       - 9200
 #    networks:
@@ -39,10 +39,10 @@ services:
     container_name: kibana_2
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
-#    ports:
-#      - ${KIBANA_PORT}:5601
-    expose:
-      - 5601
+    ports:
+      - ${KIBANA_PORT}:5601
+#    expose:
+#      - 5601
     environment:
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
 #    networks:

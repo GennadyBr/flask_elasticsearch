@@ -42,7 +42,7 @@ services:
 #    ports:
 #      - ${KIBANA_PORT}:5601
     expose:
-      - 5600
+      - 5601
     environment:
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
 #    networks:

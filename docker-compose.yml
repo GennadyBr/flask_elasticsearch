@@ -16,7 +16,7 @@ services:
       - .env
 
   elastic_2:
-    image: elasticsearch:8.11.1
+    image: elasticsearch:8.10.2
     container_name: elastic_2
     environment:
       - discovery.type=single-node
@@ -31,7 +31,7 @@ services:
       - 9200
 
   kibana_2:
-    image: kibana:8.11.1
+    image: kibana:8.10.2
     container_name: kibana_2
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z

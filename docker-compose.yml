@@ -30,20 +30,20 @@ services:
     expose:
       - 9200
 
-  kibana_2:
-    image: kibana:8.11.1
-    container_name: kibana_2
-    volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
-    ports:
-      - ${KIBANA_PORT}:5601
-    environment:
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    depends_on:
-      - elastic_2
-    restart: always
-    env_file:
-      - .env
+#  kibana_2:
+#    image: kibana:8.11.1
+#    container_name: kibana_2
+#    volumes:
+#      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+#    ports:
+#      - ${KIBANA_PORT}:5601
+#    environment:
+#      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+#    depends_on:
+#      - elastic_2
+#    restart: always
+#    env_file:
+#      - .env
 
 volumes:
   elastic_2_volume:
